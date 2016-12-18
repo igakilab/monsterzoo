@@ -23,16 +23,16 @@ public class MonsterZoo {
 	void move(){
 		this.distance++;
 		System.out.println(distance+"km");
-		for(int i=0;i<this.egg.length;i++){
+		for(int i=0;i<this.egg.length;i++){//卵は移動距離が進むと孵化するため，何km移動したかを更新する
 			if(this.egg[i]==true){
 				this.eggDistance[i]++;
 			}
 		}
 
-		int flg1 = (int)(Math.random()*10);
+		int flg1 = (int)(Math.random()*10);//0,1の場合はズーstation，7~9の場合はモンスター
 		if(flg1<=1){
 			System.out.println("ズーstationを見つけた！");
-			int b=(int)(Math.random()*3);
+			int b=(int)(Math.random()*3);//ball,fruits,eggがランダムに出る
 			int f=(int)(Math.random()*2);
 			int e=(int)(Math.random()*2);
 			System.out.println("ボールを"+b+"個，"+"フルーツを"+f+"個"+"卵を"+e+"個Getした！");
@@ -49,7 +49,7 @@ public class MonsterZoo {
 				}
 			}
 		}else if(flg1>=7){
-			int m = (int)(this.monsterZukan.length*Math.random());
+			int m = (int)(this.monsterZukan.length*Math.random());//monsterZukanからランダムにモンスターを出す
 			System.out.println(this.monsterZukan[m]+"が現れた！");
 			for(int i=0;i<3&&this.balls>0;i++){//捕まえる or 3回ボールを投げるまで繰り返す
 				int r = (int)(6*Math.random());//0~5までの数字をランダムに返す
@@ -58,8 +58,6 @@ public class MonsterZoo {
 					this.fruits--;
 					r = r * 2;
 				}
-				//int b = (int)(3*Math.random())+1;//ボールを投げる数
-				//b = Math.min(this.balls, b);//手持ちのボールの数とbの小さい方をボールを投げる数とする
 				System.out.println(this.monsterZukan[m]+"にボールを投げた");
 				this.balls--;
 				if(this.monsterRare[m]<=r){//monsterRare[m]の値がr以下の場合
