@@ -99,8 +99,8 @@ public class MonsterZoo {
 		return balls;
 	}
 
-	public int getFruits() {
-		return fruits;
+	public void showThrowableItems(){
+		System.out.println("手持ちのボールは"+this.balls+"個，フルーツは"+this.fruits+"個");
 	}
 
 	public String[] getUserMonster() {
