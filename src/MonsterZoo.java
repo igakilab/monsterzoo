@@ -22,7 +22,6 @@ public class MonsterZoo {
 	//呼び出すと1km distanceが増える
 	void move(){
 		this.distance++;
-		System.out.println(distance+"km");
 		for(int i=0;i<this.egg.length;i++){//卵は移動距離が進むと孵化するため，何km移動したかを更新する
 			if(this.egg[i]==true){
 				this.eggDistance[i]++;
@@ -96,60 +95,20 @@ public class MonsterZoo {
 		return distance;
 	}
 
-	public void setDistance(double distance) {
-		this.distance = distance;
-	}
-
 	public int getBalls() {
 		return balls;
-	}
-
-	public void setBalls(int balls) {
-		this.balls = balls;
 	}
 
 	public int getFruits() {
 		return fruits;
 	}
 
-	public void setFruits(int fruits) {
-		this.fruits = fruits;
-	}
-
-	public boolean[] getEgg() {
-		return egg;
-	}
-
-	public void setEgg(boolean[] egg) {
-		this.egg = egg;
-	}
-
-	public double[] getEggDistance() {
-		return eggDistance;
-	}
-
-	public void setEggDistance(double[] eggDistance) {
-		this.eggDistance = eggDistance;
-	}
-
 	public String[] getUserMonster() {
 		return userMonster;
 	}
 
-	public void setUserMonster(String[] userMonster) {
-		this.userMonster = userMonster;
-	}
-
-	public String[] getMonsterZukan() {
-		return monsterZukan;
-	}
-
 	public void setMonsterZukan(String[] monsterZukan) {
 		this.monsterZukan = monsterZukan;
-	}
-
-	public double[] getMonsterRare() {
-		return monsterRare;
 	}
 
 	public void setMonsterRare(double[] monsterRare) {
