@@ -23,7 +23,7 @@ public class Main {
 		}
 
 		System.out.println("ボールがなくなった！");
-		System.out.println(pz.getDistance()+"km歩いた！");
+		pz.showDistance();
 
 		for(int i=0;i<pz.getUserMonster().length;i++){
 			if(pz.getUserMonster()[i]!=null){
