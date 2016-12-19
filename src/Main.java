@@ -14,6 +14,8 @@ public class Main {
 				Thread.sleep(1000);
 				if(pz.getBalls()>0){
 					pz.move();
+					System.out.println("手持ちのボールは"+pz.getBalls()+"個，フルーツは"+pz.getFruits()+"個");
+					pz.showDistance();
 				}else{
 					break;
 				}
@@ -23,7 +25,6 @@ public class Main {
 		}
 
 		System.out.println("ボールがなくなった！");
-		pz.showDistance();
 
 		for(int i=0;i<pz.getUserMonster().length;i++){
 			if(pz.getUserMonster()[i]!=null){
