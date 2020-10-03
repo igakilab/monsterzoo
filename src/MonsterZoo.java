@@ -12,14 +12,11 @@ public class MonsterZoo {
 	boolean egg[] = new boolean[9];
 
 	//ユーザがGetしたモンスター一覧
-	//String userMonster[] = new String[100];
 	ArrayList <Monster> userGetedMonster = new ArrayList<>();
 
 	//モンスター図鑑．モンスターの名前とレア度(0.0~9.0)がそれぞれの配列に保存されている
 	//レア度が高いほうが捕まえにくい
-	//String monsterZukan[] = new String[22];
 	ArrayList <Monster> mondex = new ArrayList<>();
-	//double monsterRare[] = new double[22];
 
 	//呼び出すと1km distanceが増える
 	void move(){
@@ -63,12 +60,6 @@ public class MonsterZoo {
 				this.balls--;
 				if(this.mondex.get(m).monsterRate<=r){//monsterRare[m]の値がr以下の場合
 					System.out.println(this.mondex.get(m).monsterName+"を捕まえた！");
-					/*for(int j=0;j<this.mondex..length;j++){
-						if(this.userMonster[j]==null){
-							this.userMonster[j]=this.mondex.get(m).monsterName;
-							break;
-						}
-					}*/
 					this.userGetedMonster.add(this.mondex.get(m));
 					break;//ボール投げ終了
 				}else{
@@ -81,12 +72,6 @@ public class MonsterZoo {
 				System.out.println("卵が孵った！");
 				int m = (int)(this.mondex.size()*Math.random());
 				System.out.println(this.mondex.get(m).monsterName+"が産まれた！");
-				/*for(int j=0;j<userMonster.length;j++){
-					if(this.userMonster[j]==null){
-						this.userMonster[j]=this.mondex.get(m).monsterName;
-						break;
-					}
-				}*/
 				this.userGetedMonster.add(this.mondex.get(m));
 				this.egg[i]=false;
 				this.eggDistance[i]=0.0;
@@ -105,16 +90,4 @@ public class MonsterZoo {
 	public int getFruits() {
 		return fruits;
 	}
-    /*
-	public String[] getUserMonster() {
-		return userMonster;
-	}
-
-	public void setMonsterZukan(String[] monsterZukan) {
-		this.monsterZukan = monsterZukan;
-	}
-
-	public void setMonsterRare(double[] monsterRare) {
-		this.monsterRare = monsterRare;
-	}*/
 }
