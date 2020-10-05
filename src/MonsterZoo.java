@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 public class MonsterZoo {
 	double distance=0.0;//歩いた距離
@@ -16,8 +16,7 @@ public class MonsterZoo {
 
 	//モンスター図鑑．モンスターの名前とレア度(0.0~9.0)がそれぞれの配列に保存されている
 	//レア度が高いほうが捕まえにくい
-	String monsterZukan[] = new String[22];
-	double monsterRare[] = new double[22];
+	ArrayList<Monster> monsterList = new ArrayList<Monster>();
 
 	//呼び出すと1km distanceが増える
 	void move(){
@@ -48,8 +47,8 @@ public class MonsterZoo {
 				}
 			}
 		}else if(flg1>=7){
-			int m = (int)(this.monsterZukan.length*Math.random());//monsterZukanからランダムにモンスターを出す
-			System.out.println(this.monsterZukan[m]+"が現れた！");
+			int m = (int)(this.monsterList.size()*Math.random());//monsterListからランダムにモンスターを出す
+			System.out.println(this.monsterList.get(m).name+"が現れた！");
 			for(int i=0;i<3&&this.balls>0;i++){//捕まえる or 3回ボールを投げるまで繰り返す
 				int r = (int)(6*Math.random());//0~5までの数字をランダムに返す
 				if(this.fruits>0){
@@ -57,31 +56,31 @@ public class MonsterZoo {
 					this.fruits--;
 					r = r * 2;
 				}
-				System.out.println(this.monsterZukan[m]+"にボールを投げた");
+				System.out.println(this.monsterList.get(m).name+"にボールを投げた");
 				this.balls--;
-				if(this.monsterRare[m]<=r){//monsterRare[m]の値がr以下の場合
-					System.out.println(this.monsterZukan[m]+"を捕まえた！");
+				if(this.monsterList.get(m).rate<=r){//monsterRare[m]の値がr以下の場合
+					System.out.println(this.monsterList.get(m).name+"を捕まえた！");
 					for(int j=0;j<userMonster.length;j++){
 						if(this.userMonster[j]==null){
-							this.userMonster[j]=this.monsterZukan[m];
+							this.userMonster[j]=this.monsterList.get(m).name;
 							break;
 						}
 					}
 					break;//ボール投げ終了
 				}else{
-					System.out.println(this.monsterZukan[m]+"に逃げられた！");
+					System.out.println(this.monsterList.get(m).name+"に逃げられた！");
 				}
 			}
 		}
 		for(int i=0;i<this.egg.length;i++){
 			if(this.egg[i]==true&&this.eggDistance[i]>=3){
 				System.out.println("卵が孵った！");
-				int m = (int)(this.monsterZukan.length*Math.random());
-				System.out.println(this.monsterZukan[m]+"が産まれた！");
+				int m = (int)(this.monsterList.size()*Math.random());
+				System.out.println(this.monsterList.get(m).name+"が産まれた！");
 
 				for(int j=0;j<userMonster.length;j++){
 					if(this.userMonster[j]==null){
-						this.userMonster[j]=this.monsterZukan[m];
+						this.userMonster[j]=this.monsterList.get(m).name;
 						break;
 					}
 				}
@@ -89,6 +88,10 @@ public class MonsterZoo {
 				this.eggDistance[i]=0.0;
 			}
 		}
+	}
+
+	public void setMonsterList(ArrayList<Monster> monsterList) {
+		this.monsterList = monsterList;
 	}
 
 	public double getDistance() {
@@ -105,13 +108,5 @@ public class MonsterZoo {
 
 	public String[] getUserMonster() {
 		return userMonster;
-	}
-
-	public void setMonsterZukan(String[] monsterZukan) {
-		this.monsterZukan = monsterZukan;
-	}
-
-	public void setMonsterRare(double[] monsterRare) {
-		this.monsterRare = monsterRare;
 	}
 }
