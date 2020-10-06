@@ -5,8 +5,6 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		setMonsterZukan();
-
 		//1000ミリ秒（1秒）ずつ止まりながらpz.move()を呼び出し続ける
 		//手持ちのボールが無くなったら終了
 		while(true){
@@ -31,35 +29,6 @@ public class Main {
 				System.out.println(pz.getUserMonster()[i]+"を捕まえた．");
 			}
 		}
-	}
-
-	//テスト用のモンスターデータを登録するメソッド
-	public static void setMonsterZukan(){
-		ArrayList<Monster> monsterList = new ArrayList<Monster>();
-		monsterList.add(new Monster("イガキン", 9));
-		monsterList.add(new Monster("ナマチュウ", 3));
-		monsterList.add(new Monster("イノウエン", 1));
-		monsterList.add(new Monster("リョージィ", 2));
-		monsterList.add(new Monster("アキモトン", 5));
-		monsterList.add(new Monster("ゴージマ", 4));
-		monsterList.add(new Monster("チュウデン", 6));
-		monsterList.add(new Monster("ヅカホン", 8));
-		monsterList.add(new Monster("ニシムラー", 7));
-		monsterList.add(new Monster("サコーデン", 2));
-		monsterList.add(new Monster("ウッチー", 5));
-		monsterList.add(new Monster("ハヤッシー", 4));
-		monsterList.add(new Monster("キーチー", 3));
-		monsterList.add(new Monster("リョクン", 1));
-		monsterList.add(new Monster("デコポン", 6));
-		monsterList.add(new Monster("カミサン", 5));
-		monsterList.add(new Monster("シスイ", 1));
-		monsterList.add(new Monster("ジョナ", 7));
-		monsterList.add(new Monster("ギダギダ", 2));
-		monsterList.add(new Monster("ミッツー", 8));
-		monsterList.add(new Monster("ゾエサン", 5));
-		monsterList.add(new Monster("キタバー", 3));
-
-		pz.setMonsterList(monsterList);
 	}
 
 }

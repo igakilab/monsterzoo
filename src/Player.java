@@ -1,4 +1,4 @@
 public class Player {
-  final Ball balls = new Ball();
-  final Distance distance = new Distance();
+  public Ball balls = new Ball();
+  public Distance distance = new Distance();
 }
