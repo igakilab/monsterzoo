@@ -8,9 +8,7 @@ public class MonsterZoo {
 	//卵は最大9個まで持てる．卵を取得するとeggにtrueが代入され，
 	//移動するたびに,eggDistanceに1.0kmずつ加算される．
 	//3km移動するとランダムでモンスターが孵る
-	double eggDistance[] = new double[9];
-	boolean egg[] = new boolean[9];
-
+    ArrayList<Egg> userHavingEggs = new ArrayList<>();
 	//ユーザがGetしたモンスター一覧
 	ArrayList <Monster> userGetedMonster = new ArrayList<>();
 
@@ -21,11 +19,7 @@ public class MonsterZoo {
 	//呼び出すと1km distanceが増える
 	void move(){
 		this.distance++;
-		for(int i=0;i<this.egg.length;i++){//卵は移動距離が進むと孵化するため，何km移動したかを更新する
-			if(this.egg[i]==true){
-				this.eggDistance[i]++;
-			}
-		}
+		this.userHavingEggs.stream().filter(i->!i.isBone).forEach(i->i.distance++);
 
 		int flg1 = (int)(Math.random()*10);//0,1の場合はズーstation，7~9の場合はモンスター
 		if(flg1<=1){
@@ -38,13 +32,8 @@ public class MonsterZoo {
 			this.fruits=this.fruits+f;
 			if(e>=1){//卵を1つ以上Getしたら
 				//egg[]に10個以上卵がない場合は新しい卵データをセットする
-				for(int i=0;i<this.eggDistance.length;i++){
-					if(this.egg[i]==false){
-						this.egg[i]=true;
-						this.eggDistance[i]=0.0;
-						break;
-					}
-				}
+				if(userHavingEggs.stream().filter(i->!i.isBone).count()<10)
+					this.userHavingEggs.add(new Egg());
 			}
 		}else if(flg1>=7){
 			int m = (int)(this.mondex.size()*Math.random());//monsterZukanからランダムにモンスターを出す
@@ -67,16 +56,16 @@ public class MonsterZoo {
 				}
 			}
 		}
-		for(int i=0;i<this.egg.length;i++){
-			if(this.egg[i]==true&&this.eggDistance[i]>=3){
-				System.out.println("卵が孵った！");
-				int m = (int)(this.mondex.size()*Math.random());
-				System.out.println(this.mondex.get(m).monsterName+"が産まれた！");
-				this.userGetedMonster.add(this.mondex.get(m));
-				this.egg[i]=false;
-				this.eggDistance[i]=0.0;
-			}
-		}
+		this.userHavingEggs.stream().filter(i->(!i.isBone&&i.distance>=3.0)).forEach(i->{
+			i.isBone=true;
+			System.out.println("卵が孵った！");
+			/*モンスーター誕生 */
+			int m = (int)(this.mondex.size()*Math.random());
+			System.out.println(this.mondex.get(m).monsterName+"が産まれた！");
+			this.userGetedMonster.add(this.mondex.get(m));
+			i.distance=0.0;
+		});
+
 	}
 
 	public double getDistance() {
