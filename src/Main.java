@@ -12,7 +12,7 @@ public class Main {
 				Thread.sleep(1000);
 				if(pz.player.balls.getCount()>0){
 					pz.move();
-					System.out.println("手持ちのボールは"+pz.player.balls.getCount()+"個，フルーツは"+pz.getFruits()+"個");
+					System.out.println("手持ちのボールは"+pz.player.balls.getCount()+"個，フルーツは"+pz.player.fruits.getCount()+"個");
 					System.out.println(pz.player.distance.getDistance()+"km歩いた．");
 				}else{
 					break;

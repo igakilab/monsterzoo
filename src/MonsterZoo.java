@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class MonsterZoo {
 	final Player player = new Player();
-	int fruits=0;//ぶつけるとモンスターが捕まえやすくなるフルーツ
 
 	//卵は最大9個まで持てる．卵を取得するとeggにtrueが代入され，
 	//移動するたびに,eggDistanceに1.0kmずつ加算される．
@@ -34,7 +33,7 @@ public class MonsterZoo {
 			int e=(int)(Math.random()*2);
 			System.out.println("ボールを"+b+"個，"+"フルーツを"+f+"個"+"卵を"+e+"個Getした！");
 			this.player.balls.add(b);
-			this.fruits=this.fruits+f;
+			this.player.fruits.add(f);
 			if(e>=1){//卵を1つ以上Getしたら
 				//egg[]に10個以上卵がない場合は新しい卵データをセットする
 				for(int i=0;i<this.eggDistance.length;i++){
@@ -50,9 +49,9 @@ public class MonsterZoo {
 			System.out.println(this.monsters.zukan.get(m).name+"が現れた！");
 			for(int i=0;i<3&&this.player.balls.getCount()>0;i++){//捕まえる or 3回ボールを投げるまで繰り返す
 				int r = (int)(6*Math.random());//0~5までの数字をランダムに返す
-				if(this.fruits>0){
+				if(this.player.fruits.getCount()>0){
 					System.out.println("フルーツを投げた！捕まえやすさが倍になる！");
-					this.fruits--;
+					this.player.fruits.decrement();
 					r = r * 2;
 				}
 				System.out.println(this.monsters.zukan.get(m).name+"にボールを投げた");
@@ -87,10 +86,6 @@ public class MonsterZoo {
 				this.eggDistance[i]=0.0;
 			}
 		}
-	}
-
-	public int getFruits() {
-		return fruits;
 	}
 
 	public String[] getUserMonster() {
