@@ -40,8 +40,8 @@ public class MonsterZoo {
 				}
 			}
 		}else if(flg1>=7){
-			int m = (int)(this.monsters.zukan.size()*Math.random());//monsterListからランダムにモンスターを出す
-			System.out.println(this.monsters.zukan.get(m).name+"が現れた！");
+			int m = (int)(this.monsters.size()*Math.random());//monsterListからランダムにモンスターを出す
+			System.out.println(this.monsters.get(m).name+"が現れた！");
 			for(int i=0;i<3&&this.player.balls.getCount()>0;i++){//捕まえる or 3回ボールを投げるまで繰り返す
 				int r = (int)(6*Math.random());//0~5までの数字をランダムに返す
 				if(this.player.fruits.getCount()>0){
@@ -49,31 +49,31 @@ public class MonsterZoo {
 					this.player.fruits.decrement();
 					r = r * 2;
 				}
-				System.out.println(this.monsters.zukan.get(m).name+"にボールを投げた");
+				System.out.println(this.monsters.get(m).name+"にボールを投げた");
 				this.player.balls.decrement();
-				if(this.monsters.zukan.get(m).rate<=r){//monsterRare[m]の値がr以下の場合
-					System.out.println(this.monsters.zukan.get(m).name+"を捕まえた！");
+				if(this.monsters.get(m).rate<=r){//monsterRare[m]の値がr以下の場合
+					System.out.println(this.monsters.get(m).name+"を捕まえた！");
 					for(int j=0;j<this.player.userMonster.size();j++){
 						if(this.player.userMonster.get(j)==null){
-							this.player.userMonster.set(j, this.monsters.zukan.get(m).name);
+							this.player.userMonster.set(j, this.monsters.get(m).name);
 							break;
 						}
 					}
 					break;//ボール投げ終了
 				}else{
-					System.out.println(this.monsters.zukan.get(m).name+"に逃げられた！");
+					System.out.println(this.monsters.get(m).name+"に逃げられた！");
 				}
 			}
 		}
 		for(int i=0;i<this.egg.length;i++){
 			if(this.egg[i]==true&&this.eggDistance[i]>=3){
 				System.out.println("卵が孵った！");
-				int m = (int)(this.monsters.zukan.size()*Math.random());
-				System.out.println(this.monsters.zukan.get(m).name+"が産まれた！");
+				int m = (int)(this.monsters.size()*Math.random());
+				System.out.println(this.monsters.get(m).name+"が産まれた！");
 
 				for(int j=0;j<this.player.userMonster.size();j++){
 					if(this.player.userMonster.get(j)==null){
-						this.player.userMonster.set(j, this.monsters.zukan.get(m).name);
+						this.player.userMonster.set(j, this.monsters.get(m).name);
 						break;
 					}
 				}

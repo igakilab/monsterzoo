@@ -1,10 +1,18 @@
 import java.util.ArrayList;
 
 public class MonsterZukan {
-  final ArrayList<Monster> zukan = new ArrayList<Monster>();
+  private ArrayList<Monster> zukan = new ArrayList<Monster>();
 
   public MonsterZukan() {
     this.setMonsterZukan();
+  }
+
+  public Integer size() {
+    return this.zukan.size();
+  }
+
+  public Monster get(Integer i) {
+    return this.zukan.get(i);
   }
 
   private void setMonsterZukan() {
