@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class MonsterZoo {
 	final Player player = new Player();
 
@@ -8,9 +6,6 @@ public class MonsterZoo {
 	//3km移動するとランダムでモンスターが孵る
 	double eggDistance[] = new double[9];
 	boolean egg[] = new boolean[9];
-
-	//ユーザがGetしたモンスター一覧
-	String userMonster[] = new String[100];
 
 	//モンスター図鑑．モンスターの名前とレア度(0.0~9.0)がそれぞれの配列に保存されている
 	//レア度が高いほうが捕まえにくい
@@ -58,9 +53,9 @@ public class MonsterZoo {
 				this.player.balls.decrement();
 				if(this.monsters.zukan.get(m).rate<=r){//monsterRare[m]の値がr以下の場合
 					System.out.println(this.monsters.zukan.get(m).name+"を捕まえた！");
-					for(int j=0;j<userMonster.length;j++){
-						if(this.userMonster[j]==null){
-							this.userMonster[j]=this.monsters.zukan.get(m).name;
+					for(int j=0;j<this.player.userMonster.size();j++){
+						if(this.player.userMonster.get(j)==null){
+							this.player.userMonster.set(j, this.monsters.zukan.get(m).name);
 							break;
 						}
 					}
@@ -76,9 +71,9 @@ public class MonsterZoo {
 				int m = (int)(this.monsters.zukan.size()*Math.random());
 				System.out.println(this.monsters.zukan.get(m).name+"が産まれた！");
 
-				for(int j=0;j<userMonster.length;j++){
-					if(this.userMonster[j]==null){
-						this.userMonster[j]=this.monsters.zukan.get(m).name;
+				for(int j=0;j<this.player.userMonster.size();j++){
+					if(this.player.userMonster.get(j)==null){
+						this.player.userMonster.set(j, this.monsters.zukan.get(m).name);
 						break;
 					}
 				}
@@ -88,7 +83,4 @@ public class MonsterZoo {
 		}
 	}
 
-	public String[] getUserMonster() {
-		return userMonster;
-	}
 }

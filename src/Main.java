@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Main {
 	static MonsterZoo pz = new MonsterZoo();
 
@@ -24,9 +22,9 @@ public class Main {
 
 		System.out.println("ボールがなくなった！");
 
-		for(int i=0;i<pz.getUserMonster().length;i++){
-			if(pz.getUserMonster()[i]!=null){
-				System.out.println(pz.getUserMonster()[i]+"を捕まえた．");
+		for(int i=0;i<pz.player.userMonster.size();i++){
+			if(pz.player.userMonster.get(i)!=null){
+				System.out.println(pz.player.userMonster.get(i)+"を捕まえた．");
 			}
 		}
 	}
