@@ -7,7 +7,7 @@ public class Distance {
   public void increment() {
     this.distance += 1;
   }
-  public Double getDistance() {
+  public Double get() {
     return this.distance;
   }
 }

@@ -12,7 +12,7 @@ public class Ball {
     this.count -= 1;
   }
 
-  public Integer getCount() {
+  public Integer count() {
     return this.count;
   }
 }

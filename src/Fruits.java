@@ -5,7 +5,7 @@ public class Fruits {
     this.count = 0;
   }
 
-  public Integer getCount() {
+  public Integer count() {
     return this.count;
   }
 
