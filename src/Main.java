@@ -2,9 +2,8 @@
 
 public class Main {
 	static MonsterZoo pz = new MonsterZoo();
-
 	public static void main(String[] args) {
-
+		pz.balls.add(10);
 		setMonsterZukan();
 
 		//1000ミリ秒（1秒）ずつ止まりながらpz.move()を呼び出し続ける
@@ -12,10 +11,10 @@ public class Main {
 		while(true){
 			try {
 				Thread.sleep(1000);
-				if(pz.getBalls()>0){
+				if(pz.balls.longValue()>0){
 					pz.move();
-					System.out.println("手持ちのボールは"+pz.getBalls()+"個，フルーツは"+pz.getFruits()+"個");
-					System.out.println(pz.getDistance()+"km歩いた．");
+					System.out.println("手持ちのボールは"+pz.balls+"個，フルーツは"+pz.fruits+"個");
+					System.out.println(pz.distance+"km歩いた．");
 				}else{
 					break;
 				}
