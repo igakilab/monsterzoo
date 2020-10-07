@@ -56,12 +56,7 @@ public class MonsterZoo {
 				this.balls.decrement();
 				if(this.monsters.get(m).rate<=r){//monsterRare[m]の値がr以下の場合
 					System.out.println(this.monsters.get(m).name+"を捕まえた！");
-					for(int j=0;j<this.userMonster.size();j++){
-						if(this.userMonster.get(j)==null){
-							this.userMonster.set(j, this.monsters.get(m).name);
-							break;
-						}
-					}
+					this.userMonster.add(this.monsters.get(m).name);
 					break;//ボール投げ終了
 				}else{
 					System.out.println(this.monsters.get(m).name+"に逃げられた！");
@@ -73,13 +68,7 @@ public class MonsterZoo {
 				System.out.println("卵が孵った！");
 				int m = (int)(this.monsters.size()*Math.random());
 				System.out.println(this.monsters.get(m).name+"が産まれた！");
-
-				for(int j=0;j<this.userMonster.size();j++){
-					if(this.userMonster.get(j)==null){
-						this.userMonster.set(j, this.monsters.get(m).name);
-						break;
-					}
-				}
+				this.userMonster.add(this.monsters.get(m).name);
 				this.egg[i]=false;
 				this.eggDistance[i]=0.0;
 			}
