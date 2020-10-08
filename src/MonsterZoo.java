@@ -1,9 +1,4 @@
 public class MonsterZoo {
-	// public Ball balls = new Ball();
-	// public Distance distance = new Distance();
-	// public Fruits fruits = new Fruits();
-	// public UserMonster userMonster = new UserMonster();
-	// private Egg egg = new Egg();
 	public Player player = new Player();
 
 	//モンスター図鑑．モンスターの名前とレア度(0.0~9.0)がそれぞれの配列に保存されている
@@ -17,20 +12,7 @@ public class MonsterZoo {
 
 		int flg1 = (int)(Math.random()*10);//0,1の場合はズーstation，7~9の場合はモンスター
 		if(flg1<=1){
-			ZooStation zooStation = new ZooStation();
-			System.out.println("ズーstationを見つけた！");
-			int b=(int)(Math.random()*3);//ball,fruits,eggがランダムに出る
-			int f=(int)(Math.random()*2);
-			int e=(int)(Math.random()*2);
-			System.out.println("ボールを"+b+"個，"+"フルーツを"+f+"個"+"卵を"+e+"個Getした！");
-			player.balls.add(b);
-			player.fruits.add(f);
-			if(e>=1){//卵を1つ以上Getしたら
-				//egg[]に10個以上卵がない場合は新しい卵データをセットする
-				if (player.egg.count() < 10) {
-					player.egg.add();
-				}
-			}
+			new ZooStation(player);
 		}else if(flg1>=7){
 			int m = (int)(this.monsters.size()*Math.random());//monsterListからランダムにモンスターを出す
 			System.out.println(this.monsters.get(m).name+"が現れた！");
