@@ -7,8 +7,7 @@ public class MonsterZoo {
 	//卵は最大9個まで持てる．卵を取得するとeggにtrueが代入され，
 	//移動するたびに,eggDistanceに1.0kmずつ加算される．
 	//3km移動するとランダムでモンスターが孵る
-	double eggDistance[] = new double[9];
-	boolean egg[] = new boolean[9];
+	private Egg egg = new Egg();
 
 	//モンスター図鑑．モンスターの名前とレア度(0.0~9.0)がそれぞれの配列に保存されている
 	//レア度が高いほうが捕まえにくい
@@ -17,11 +16,7 @@ public class MonsterZoo {
 	//呼び出すと1km distanceが増える
 	void move(){
 		this.distance.increment();
-		for(int i=0;i<this.egg.length;i++){//卵は移動距離が進むと孵化するため，何km移動したかを更新する
-			if(this.egg[i]==true){
-				this.eggDistance[i]++;
-			}
-		}
+		egg.walk();
 
 		int flg1 = (int)(Math.random()*10);//0,1の場合はズーstation，7~9の場合はモンスター
 		if(flg1<=1){
@@ -34,12 +29,8 @@ public class MonsterZoo {
 			this.fruits.add(f);
 			if(e>=1){//卵を1つ以上Getしたら
 				//egg[]に10個以上卵がない場合は新しい卵データをセットする
-				for(int i=0;i<this.eggDistance.length;i++){
-					if(this.egg[i]==false){
-						this.egg[i]=true;
-						this.eggDistance[i]=0.0;
-						break;
-					}
+				if (egg.count() < 10) {
+					egg.add();
 				}
 			}
 		}else if(flg1>=7){
@@ -63,15 +54,12 @@ public class MonsterZoo {
 				}
 			}
 		}
-		for(int i=0;i<this.egg.length;i++){
-			if(this.egg[i]==true&&this.eggDistance[i]>=3){
-				System.out.println("卵が孵った！");
-				int m = (int)(this.monsters.size()*Math.random());
-				System.out.println(this.monsters.get(m).name+"が産まれた！");
-				this.userMonster.add(this.monsters.get(m).name);
-				this.egg[i]=false;
-				this.eggDistance[i]=0.0;
-			}
+
+		for (int i=0; i<egg.hatching(); i++) {
+			System.out.println("卵が孵った！");
+			int m = (int)(this.monsters.size()*Math.random());
+			System.out.println(this.monsters.get(m).name + "が産まれた！");
+			this.userMonster.add(this.monsters.get(m).name);
 		}
 	}
 
