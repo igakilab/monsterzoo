@@ -8,10 +8,10 @@ public class Main {
 		while(true){
 			try {
 				Thread.sleep(1000);
-				if(pz.balls.count()>0){
+				if(pz.player.balls.count()>0){
 					pz.move();
-					System.out.println("手持ちのボールは"+pz.balls.count()+"個，フルーツは"+pz.fruits.count()+"個");
-					System.out.println(pz.distance.get()+"km歩いた．");
+					System.out.println("手持ちのボールは"+pz.player.balls.count()+"個，フルーツは"+pz.player.fruits.count()+"個");
+					System.out.println(pz.player.distance.get()+"km歩いた．");
 				}else{
 					break;
 				}
@@ -22,9 +22,9 @@ public class Main {
 
 		System.out.println("ボールがなくなった！");
 
-		for(int i=0;i<pz.userMonster.size();i++){
-			if(pz.userMonster.get(i)!=null){
-				System.out.println(pz.userMonster.get(i)+"を捕まえた．");
+		for(int i=0;i<pz.player.monster.size();i++){
+			if(pz.player.monster.get(i)!=null){
+				System.out.println(pz.player.monster.get(i)+"を捕まえた．");
 			}
 		}
 	}
