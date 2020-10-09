@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class Main {
@@ -7,6 +10,40 @@ public class Main {
 
 		setMonsterZukan();
 
+		actionLoop();
+
+		resultOutput();
+	}
+
+	//テスト用のモンスターデータを登録するメソッド
+	public static void setMonsterZukan(){
+		
+		List<String> monsters = new ArrayList<>(
+			Arrays.asList(
+				"イガキン", "ナマチュウ", "イノウエン", "リョージィ", "アキモトン", 
+				"ゴージマ", "チュウデン", "ヅカホン", "ニシムラー", "サコーデン", 
+				"ウッチー", "ハヤッシー", "キーチー", "リョクン", "デコポン", 
+				"カミサン", "シスイ", "ジョナ", "ギダギダ", "ミッツー", 
+				"ゾエサン", "キタバー"
+			)
+		);
+
+		List<Integer> rarity = new ArrayList<>(
+			Arrays.asList(
+				9, 3, 1, 2, 5, 
+				4, 6, 8, 7, 2, 
+				5, 4, 3, 1, 6, 
+				5, 1, 7, 2, 8, 
+				5, 3
+			)
+		);
+
+		pz.setMonsters(monsters);
+		pz.setRarity(rarity);
+	}
+
+  // ballsが0になるまでのアクションのループ処理を行うメソッド
+	public static void actionLoop() {
 		//1000ミリ秒（1秒）ずつ止まりながらpz.move()を呼び出し続ける
 		//手持ちのボールが無くなったら終了
 		while(true){
@@ -16,14 +53,16 @@ public class Main {
 					pz.move();
 					System.out.println("手持ちのボールは"+pz.getBalls()+"個，フルーツは"+pz.getFruits()+"個");
 					System.out.println(pz.getDistance()+"km歩いた．");
-				}else{
-					break;
 				}
+				if(pz.getBalls()==0) break;
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				e.printStackTrace(); // スタックトレース(実行したメソッドの時系列)を出力
 			}
 		}
+	}
 
+  // 結果を出力するメソッド
+	public static void resultOutput(){
 		System.out.println("ボールがなくなった！");
 
 		for(int i=0;i<pz.getUserMonster().length;i++){
@@ -32,36 +71,4 @@ public class Main {
 			}
 		}
 	}
-
-	//テスト用のモンスターデータを登録するメソッド
-	public static void setMonsterZukan(){
-		String tempMonster[] = new String[22];
-		double tempMonsterRare[] = new double[22];
-		tempMonster[0]="イガキン";	tempMonsterRare[0]=9;
-		tempMonster[1]="ナマチュウ";	tempMonsterRare[1]=3;
-		tempMonster[2]="イノウエン";	tempMonsterRare[2]=1;
-		tempMonster[3]="リョージィ";	tempMonsterRare[3]=2;
-		tempMonster[4]="アキモトン";	tempMonsterRare[4]=5;
-		tempMonster[5]="ゴージマ";	tempMonsterRare[5]=4;
-		tempMonster[6]="チュウデン";	tempMonsterRare[6]=6;
-		tempMonster[7]="ヅカホン";	tempMonsterRare[7]=8;
-		tempMonster[8]="ニシムラー";	tempMonsterRare[8]=7;
-		tempMonster[9]="サコーデン";	tempMonsterRare[9]=2;
-		tempMonster[10]="ウッチー";	tempMonsterRare[10]=5;
-		tempMonster[11]="ハヤッシー";	tempMonsterRare[11]=4;
-		tempMonster[12]="キーチー";	tempMonsterRare[12]=3;
-		tempMonster[13]="リョクン";	tempMonsterRare[13]=1;
-		tempMonster[14]="デコポン";	tempMonsterRare[14]=6;
-		tempMonster[15]="カミサン";	tempMonsterRare[15]=5;
-		tempMonster[16]="シスイ";	tempMonsterRare[16]=1;
-		tempMonster[17]="ジョナ";	tempMonsterRare[17]=7;
-		tempMonster[18]="ギダギダ";	tempMonsterRare[18]=2;
-		tempMonster[19]="ミッツー";	tempMonsterRare[19]=8;
-		tempMonster[20]="ゾエサン";	tempMonsterRare[20]=5;
-		tempMonster[21]="キタバー";	tempMonsterRare[21]=3;
-
-		pz.setMonsterZukan(tempMonster);
-		pz.setMonsterRare(tempMonsterRare);
-	}
-
 }
