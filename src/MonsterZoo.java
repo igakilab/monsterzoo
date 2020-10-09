@@ -38,11 +38,8 @@ public class MonsterZoo {
 		System.out.println("ボールを"+b+"個，"+"フルーツを"+f+"個"+"卵を"+e+"個Getした！");
 		this.balls.add(b);
 		this.fruits.add(f);
-		if(e>=1){//卵を1つ以上Getしたら
-			//egg[]に10個以上卵がない場合は新しい卵データをセットする
-			if(userHavingEggs.stream().filter(i->!i.isBone).count()<10)
-				this.userHavingEggs.add(new Egg());
-		}
+		if(e>=1) if(userHavingEggs.stream().filter(i->!i.isBone).count()<10)
+			this.userHavingEggs.add(new Egg());
 	}
 	public void encountMonster(){
 		int m = (int)(this.mondex.size()*Math.random());//monsterZukanからランダムにモンスターを出す
