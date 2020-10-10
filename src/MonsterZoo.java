@@ -2,14 +2,11 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.LongAdder;
 
 public class MonsterZoo {
-	public double distance=0.0;//歩いた距離
-	public final LongAdder balls = new LongAdder();
-	public final LongAdder fruits = new LongAdder();
-	//public int balls=10;//モンスターを捕まえられるボールの数
-	//public int fruits=0;//ぶつけるとモンスターが捕まえやすくなるフルーツ
+	public final LongAdder distance= new LongAdder();//歩いた距離
+	public final LongAdder balls = new LongAdder();//モンスターを捕まえられるボールの数
+	public final LongAdder fruits = new LongAdder();//ぶつけるとモンスターが捕まえやすくなるフルーツ
 
-	//卵は最大9個まで持てる．卵を取得するとeggにtrueが代入され，
-	//移動するたびに,eggDistanceに1.0kmずつ加算される．
+	//卵は最大9個まで持てる．移動するたびに,distanceに1kmずつ加算される．
 	//3km移動するとランダムでモンスターが孵る
     final ArrayList<Egg> userHavingEggs = new ArrayList<>();
 	//ユーザがGetしたモンスター一覧
@@ -21,12 +18,12 @@ public class MonsterZoo {
 
 	//呼び出すと1km distanceが増える
 	void move(){
-		this.distance++;
-		this.userHavingEggs.stream().filter(i->!i.isBone).forEach(i->i.distance++);
+		this.distance.increment();
+		this.userHavingEggs.stream().filter(i->!i.isBone).forEach(i->i.distance.increment());
 		int flg1 = (int)(Math.random()*10);//0,1の場合はズーstation，7~9の場合はモンスター
 		if(flg1<=1) this.arriveAtZooStation();
 		else if(flg1>=7) this.encountMonster();
-		this.userHavingEggs.stream().filter(i->(!i.isBone&&i.distance>=3.0)).forEach(i->{
+		this.userHavingEggs.stream().filter(i->(!i.isBone&&i.distance.longValue()>=3)).forEach(i->{
 			this.userGetedMonster.add(i.boneMonster(this.mondex));
 		});
 	}

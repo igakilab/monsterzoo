@@ -14,7 +14,7 @@ public class Main {
 				if(pz.balls.longValue()>0){
 					pz.move();
 					System.out.println("手持ちのボールは"+pz.balls+"個，フルーツは"+pz.fruits+"個");
-					System.out.println(pz.distance+"km歩いた．");
+					System.out.println(String.format("%.1fkm歩いた",(float)pz.distance.longValue()));
 				}else{
 					break;
 				}
