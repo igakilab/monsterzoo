@@ -8,7 +8,7 @@ public class MonsterZoo {
 
 	//卵は最大9個まで持てる．移動するたびに,distanceに1kmずつ加算される．
 	//3km移動するとランダムでモンスターが孵る
-    final ArrayList<Egg> userHavingEggs = new ArrayList<>();
+	final ArrayList<Egg> userHavingEggs = new ArrayList<>();
 	//ユーザがGetしたモンスター一覧
 	final ArrayList <Monster> userGetedMonster = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class MonsterZoo {
 		System.out.println("ボールを"+b+"個，"+"フルーツを"+f+"個"+"卵を"+e+"個Getした！");
 		this.balls.add(b);
 		this.fruits.add(f);
-		if(e>=1) if(userHavingEggs.stream().filter(i->!i.isBone).count()<10)
+		if(e>=1) if(userHavingEggs.stream().filter(i->!i.isBone).count()<9)
 			this.userHavingEggs.add(new Egg());
 	}
 	public void encountMonster(){
