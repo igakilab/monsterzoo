@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class MonsterZoo {
-	double distance=0.0;//歩いた距離
-	int balls=10;//モンスターを捕まえられるボールの数
-	int fruits=0;//ぶつけるとモンスターが捕まえやすくなるフルーツ
-
+	// double distance=0.0;//歩いた距離
+	// int balls=10;//モンスターを捕まえられるボールの数
+	// int fruits=0;//ぶつけるとモンスターが捕まえやすくなるフルーツ
+	static NumberingManeger number_maneger = new NumberingManeger();
 	//卵は最大9個まで持てる．卵を取得するとeggにtrueが代入され，
 	//移動するたびに,eggDistanceに1.0kmずつ加算される．
 	//3km移動するとランダムでモンスターが孵る
@@ -23,7 +23,8 @@ public class MonsterZoo {
 
 	//呼び出すと1km distanceが増える
 	void move(){
-		this.distance++;
+		// this.distance++;
+		number_maneger.add_distance();
 		for(int i=0;i<this.egg.length;i++){//卵は移動距離が進むと孵化するため，何km移動したかを更新する
 			if(this.egg[i]==true){
 				this.eggDistance[i]++;
@@ -45,8 +46,9 @@ public class MonsterZoo {
 		int f=(int)(Math.random()*2);
 		int e=(int)(Math.random()*2);
 		System.out.println("ボールを"+b+"個，"+"フルーツを"+f+"個"+"卵を"+e+"個Getした！");
-		this.balls=this.balls+b;
-		this.fruits=this.fruits+f;
+		// this.balls=this.balls+b;
+		// this.fruits=this.fruits+f;
+		number_maneger.add(f,b);
 		if(e>=1){//卵を1つ以上Getしたら
 			//egg[]に10個以上卵がない場合は新しい卵データをセットする
 			for(int i=0;i<this.eggDistance.length;i++){
@@ -62,28 +64,50 @@ public class MonsterZoo {
 	void monster_meet_and_battle(){
 		int m = (int)(this.monsterZukan.size()*Math.random());//monsterZukanからランダムにモンスターを出す
 		System.out.println(this.monsterZukan.get(m)+"が現れた！");
-		for(int i=0;i<3&&this.balls>0;i++){//捕まえる or 3回ボールを投げるまで繰り返す
+		for(int i=0;i<3&&number_maneger.get_balls()>0;i++){//捕まえる or 3回ボールを投げるまで繰り返す
 			int r = (int)(6*Math.random());//0~5までの数字をランダムに返す
-			if(this.fruits>0){
-				System.out.println("フルーツを投げた！捕まえやすさが倍になる！");
-				this.fruits--;
-				r = r * 2;
-			}
+			// if(number_maneger.get_fruits()>0){
+			// 	System.out.println("フルーツを投げた！捕まえやすさが倍になる！");
+			// 	// this.fruits--;
+			// 	number_maneger.sub_fruits();
+			// 	r = r * 2;
+			// }
+			fruits_throw(r);
 			System.out.println(this.monsterZukan.get(m)+"にボールを投げた");
-			this.balls--;
-			if(this.monsterRare.get(m)<=r){//monsterRare[m]の値がr以下の場合
-				System.out.println(this.monsterZukan.get(m)+"を捕まえた！");
-				for(int j=0;j<userMonster.length;j++){
-					if(this.userMonster[j]==null){
-						this.userMonster[j]=this.monsterZukan.get(m);
-						break;
-					}
-				}
-				break;//ボール投げ終了
-			}else{
-				System.out.println(this.monsterZukan.get(m)+"に逃げられた！");
+			// this.balls--;
+			number_maneger.sub_ball();
+			if (escapte_or_catch(r, m)){
+				break;
 			}
+			// if(this.monsterRare.get(m)<=r){//monsterRare[m]の値がr以下の場合
+			// 	System.out.println(this.monsterZukan.get(m)+"を捕まえた！");
+			// 	save_usermonster(m);
+			// 	break;//ボール投げ終了
+			// }else{
+			// 	System.out.println(this.monsterZukan.get(m)+"に逃げられた！");
+			// }
 		}
+	}
+
+	public Boolean escapte_or_catch(int r, int m){
+		if(this.monsterRare.get(m)<=r){//monsterRare[m]の値がr以下の場合
+			System.out.println(this.monsterZukan.get(m)+"を捕まえた！");
+			save_usermonster(m);
+			// break;//ボール投げ終了
+			return true;
+		}else{
+			System.out.println(this.monsterZukan.get(m)+"に逃げられた！");
+			return false;
+		}
+	}
+
+	public Boolean fruits_throw(Integer r){
+		if(number_maneger.get_fruits()>0){
+			System.out.println("フルーツを投げた！捕まえやすさが倍になる！");
+			number_maneger.sub_fruits();
+			return true;
+		}
+		return false;
 	}
 
 	void monster_bone(){
@@ -92,29 +116,32 @@ public class MonsterZoo {
 				System.out.println("卵が孵った！");
 				int m = (int)(this.monsterZukan.size()*Math.random());
 				System.out.println(this.monsterZukan.get(m)+"が産まれた！");
-
-				for(int j=0;j<userMonster.length;j++){
-					if(this.userMonster[j]==null){
-						this.userMonster[j]=this.monsterZukan.get(m); //ここをappendに変更する
-						break;
-					}
-				}
+				save_usermonster(m);
 				this.egg[i]=false;
 				this.eggDistance[i]=0.0;
 			}
 		}
 	}
 
+	public void save_usermonster(int m){
+		for(int j=0;j<userMonster.length;j++){
+			if(this.userMonster[j]==null){
+				this.userMonster[j]=this.monsterZukan.get(m);
+				break;
+			}
+		}
+	}
+
 	public double getDistance() {
-		return distance;
+		return number_maneger.get_distance();
 	}
 
 	public int getBalls() {
-		return balls;
+		return number_maneger.get_balls();
 	}
 
 	public int getFruits() {
-		return fruits;
+		return number_maneger.get_fruits();
 	}
 
 	public String[] getUserMonster() {

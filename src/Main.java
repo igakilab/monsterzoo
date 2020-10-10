@@ -11,19 +11,40 @@ public class Main {
 		//手持ちのボールが無くなったら終了
 		while(true){
 			try {
+				// move_and_log_and_result_printer();
 				Thread.sleep(1000);
-				if(pz.getBalls()>0){
-					pz.move();
-					System.out.println("手持ちのボールは"+pz.getBalls()+"個，フルーツは"+pz.getFruits()+"個");
-					System.out.println(pz.getDistance()+"km歩いた．");
-				}else{
+				if (isball()){
 					break;
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+	}
 
+	public static Boolean isball(){
+		if (pz.getBalls() <= 0){
+			resultprinter();
+			return true;
+		}
+		move_and_log_and_result_printer();
+		return false;
+	}
+
+	public static void move_and_log_and_result_printer(){
+		// Thread.sleep(1000);
+		if(pz.getBalls()>0){
+			pz.move();
+			current_situation_printer();
+		}
+	}
+
+	public static void current_situation_printer(){
+		System.out.println("手持ちのボールは"+pz.getBalls()+"個，フルーツは"+pz.getFruits()+"個");
+		System.out.println(pz.getDistance()+"km歩いた．");
+	}
+
+	public static void resultprinter(){
 		System.out.println("ボールがなくなった！");
 
 		for(int i=0;i<pz.getUserMonster().length;i++){
