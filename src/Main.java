@@ -2,20 +2,21 @@
 
 public class Main {
 	static MonsterZoo pz = new MonsterZoo();
-
+    
 	public static void main(String[] args) {
-
-		setMonsterZukan();
-
+        MondexReader monsterReader = new MondexReader();
+        StatusSetAndGet status = new StatusSetAndGet();
+        monsterReader.readMondex(args[0], pz, status);
+		//setMonsterZukan();
 		//1000ミリ秒（1秒）ずつ止まりながらpz.move()を呼び出し続ける
 		//手持ちのボールが無くなったら終了
 		while(true){
 			try {
 				Thread.sleep(1000);
-				if(pz.getBalls()>0){
+				if(status.getBalls(pz)>0){
 					pz.move();
-					System.out.println("手持ちのボールは"+pz.getBalls()+"個，フルーツは"+pz.getFruits()+"個");
-					System.out.println(pz.getDistance()+"km歩いた．");
+					System.out.println("手持ちのボールは"+status.getBalls(pz)+"個，フルーツは"+status.getFruits(pz)+"個");
+					System.out.println(status.getDistance(pz)+"km歩いた．");
 				}else{
 					break;
 				}
@@ -26,13 +27,13 @@ public class Main {
 
 		System.out.println("ボールがなくなった！");
 
-		for(int i=0;i<pz.getUserMonster().length;i++){
-			if(pz.getUserMonster()[i]!=null){
-				System.out.println(pz.getUserMonster()[i]+"を捕まえた．");
+		for(int i=0;i<status.getUserMonster(pz).length;i++){
+			if(status.getUserMonster(pz)[i]!=null){
+				System.out.println(status.getUserMonster(pz)[i]+"を捕まえた．");
 			}
 		}
 	}
-
+    /*
 	//テスト用のモンスターデータを登録するメソッド
 	public static void setMonsterZukan(){
 		String tempMonster[] = new String[22];
@@ -59,9 +60,9 @@ public class Main {
 		tempMonster[19]="ミッツー";	tempMonsterRare[19]=8;
 		tempMonster[20]="ゾエサン";	tempMonsterRare[20]=5;
 		tempMonster[21]="キタバー";	tempMonsterRare[21]=3;
-
 		pz.setMonsterZukan(tempMonster);
 		pz.setMonsterRare(tempMonsterRare);
 	}
+    */
 
 }

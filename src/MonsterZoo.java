@@ -1,6 +1,4 @@
-
-
-public class MonsterZoo {
+public class MonsterZoo{
 	double distance=0.0;//歩いた距離
 	int balls=10;//モンスターを捕まえられるボールの数
 	int fruits=0;//ぶつけるとモンスターが捕まえやすくなるフルーツ
@@ -89,29 +87,5 @@ public class MonsterZoo {
 				this.eggDistance[i]=0.0;
 			}
 		}
-	}
-
-	public double getDistance() {
-		return distance;
-	}
-
-	public int getBalls() {
-		return balls;
-	}
-
-	public int getFruits() {
-		return fruits;
-	}
-
-	public String[] getUserMonster() {
-		return userMonster;
-	}
-
-	public void setMonsterZukan(String[] monsterZukan) {
-		this.monsterZukan = monsterZukan;
-	}
-
-	public void setMonsterRare(double[] monsterRare) {
-		this.monsterRare = monsterRare;
 	}
 }

@@ -1,0 +1,32 @@
+追加したファイル
+Mondex.txt
+  モンスターの番号と名前とレア度を書いたファイル
+  format: No,name,Rare 
+
+MondexReader.java
+  textファイルを読み込み，図鑑に登録をしている．
+  Mainでpzをnewしているからずっとそのpzを引数でもらう．
+  1. file open
+  2. 一行読む
+  3. "," でsplit
+  4. 図鑑登録
+
+StatusSetAndGet.java
+  基本MonstarZoo.javaの下にあったものを全部移した．
+  MonstarZooから移すため，MonstarZooにある変数をどうにかする必要がある．
+  Mainでpzをnewしているからそれを引数としてもらい，参照しに行く．
+  そのため必ずgetやsetする場合は，MonsterZoo pzが引数に必要となる．
+
+  たぶん下のset/get method群はMainでしか呼ばれてないはず．
+
+
+<----------------------------------->
+その他の変更点
+Main.java
+  図鑑を読み込むMondexReader, 情報処理するStatusSetAndGetを追加
+  getBallsやgetFruitsはpzから呼び出されていたが全てstatusから呼ぶように変更
+  例: if(pz.getBalls()>0) → if(status.getBalls(pz)>0)
+
+MonstarZoo.java
+  下のset/get methodを全て削除
+
